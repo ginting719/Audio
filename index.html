@@ -1,14 +1,54 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alpro Weekly Podcast</title>
+  <title>Podcast dengan PDF SOP Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 1em;
+      background: #121212;
+      color: white;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .audio-player {
+      flex: 1 1 300px;
+      max-width: 400px;
+    }
+    iframe.pdf-viewer {
+      flex: 2 1 600px;
+      height: 600px;
+      border: none;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Alpro Weekly Podcast</h1>
-  <audio controls src="audio/episode1.mp3"></audio>
-  <iframe src="pdfjs/viewer.html?file=/AudioProject/pdf/episode1.pdf" width="100%" height="600px"></iframe>
+
+  <h1>Podcast Alpro Weekly + PDF SOP</h1>
+
+  <div class="container">
+    <div class="audio-player">
+      <h2>Episode 1</h2>
+      <audio controls preload="none" style="width:100%">
+        <source src="audio/episode1.mp3" type="audio/mpeg" />
+        Browser kamu tidak mendukung audio.
+      </audio>
+    </div>
+
+    <iframe
+      class="pdf-viewer"
+      src="pdfjs/viewer.html?file=../pdf/sop1.pdf"
+      allowfullscreen
+    ></iframe>
+  </div>
+
 </body>
 </html>
