@@ -2,53 +2,79 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Podcast dengan PDF SOP Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Podcast SOP Perusahaan</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 1em;
-      background: #121212;
-      color: white;
-    }
-    .container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .audio-player {
-      flex: 1 1 300px;
-      max-width: 400px;
-    }
-    iframe.pdf-viewer {
-      flex: 2 1 600px;
-      height: 600px;
-      border: none;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    body { font-family: sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+    .container { display: flex; flex: 1; }
+    .sidebar { width: 30%; padding: 1rem; border-right: 1px solid #ddd; overflow-y: auto; }
+    .content { flex: 1; padding: 1rem; }
+    iframe { width: 100%; height: 500px; border: none; }
+    input[type="text"] { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
+    .item { margin-bottom: 1rem; cursor: pointer; padding: 0.5rem; border-radius: 6px; }
+    .item:hover { background-color: #f0f0f0; }
   </style>
 </head>
 <body>
-
-  <h1>Podcast Alpro Weekly + PDF SOP</h1>
-
   <div class="container">
-    <div class="audio-player">
-      <h2>Episode 1</h2>
-      <audio controls preload="none" style="width:100%">
-        <source src="audio/episode1.mp3" type="audio/mpeg" />
-        Browser kamu tidak mendukung audio.
-      </audio>
+    <div class="sidebar">
+      <input type="text" id="search" placeholder="Cari SOP...">
+      <div id="list"></div>
     </div>
-
-    <iframe
-      class="pdf-viewer"
-      src="pdfjs/viewer.html?file=../pdf/sop1.pdf"
-      allowfullscreen
-    ></iframe>
+    <div class="content">
+      <h2 id="sop-title">Pilih SOP</h2>
+      <audio id="audio-player" controls style="width: 100%;" src=""></audio>
+      <iframe id="pdf-viewer" src=""></iframe>
+    </div>
   </div>
 
+  <script>
+    // ✅ Simulasi data SOP langsung di dalam file
+    const data = [
+      {
+        title: "SOP Onboarding",
+        audio: "audio/onboarding.mp3",
+        pdf: "pdf/onboarding.pdf"
+      },
+      {
+        title: "SOP Rekrutmen",
+        audio: "audio/rekrutmen.mp3",
+        pdf: "pdf/rekrutmen.pdf"
+      }
+    ];
+
+    const listDiv = document.getElementById('list');
+    const searchInput = document.getElementById('search');
+    const audioPlayer = document.getElementById('audio-player');
+    const pdfViewer = document.getElementById('pdf-viewer');
+    const sopTitle = document.getElementById('sop-title');
+
+    // ✅ Ganti ini dengan username GitHub kamu
+    const cdnBase = 'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sop-podcast/';
+
+    function renderList(items) {
+      listDiv.innerHTML = '';
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.textContent = item.title;
+        div.onclick = () => {
+          sopTitle.textContent = item.title;
+          audioPlayer.src = `${cdnBase}${item.audio}`;
+          pdfViewer.src = `https://cdn.jsdelivr.net/npm/pdfjs-dist/web/viewer.html?file=${cdnBase}${item.pdf}`;
+        };
+        listDiv.appendChild(div);
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = data.filter(item => item.title.toLowerCase().includes(keyword));
+      renderList(filtered);
+    });
+
+    // Load initial list
+    renderList(data);
+  </script>
 </body>
 </html>
