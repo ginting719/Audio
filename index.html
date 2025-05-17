@@ -3,16 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ALPRO PODCAST</title>
+  <title>Podcast SOP Perusahaan</title>
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
-    .container { display: flex; flex: 1; }
-    .sidebar { width: 30%; padding: 1rem; border-right: 1px solid #ddd; overflow-y: auto; }
-    .content { flex: 1; padding: 1rem; }
-    iframe { width: 100%; height: 500px; border: none; }
-    input[type="text"] { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
-    .item { margin-bottom: 1rem; cursor: pointer; padding: 0.5rem; border-radius: 6px; }
-    .item:hover { background-color: #f0f0f0; }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 30%;
+      padding: 1rem;
+      border-right: 1px solid #ddd;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .content {
+      flex: 1;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+
+    .item {
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+    }
+
+    .item:hover {
+      background-color: #eaeaea;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
   </style>
 </head>
 <body>
@@ -23,57 +71,64 @@
     </div>
     <div class="content">
       <h2 id="sop-title">Pilih SOP</h2>
-      <audio id="audio-player" controls style="width: 100%;" src=""></audio>
-      <iframe id="pdf-viewer" src=""></iframe>
+      <audio id="audio-player" controls style="width: 100%; margin-bottom: 1rem;"></audio>
+      <iframe id="pdf-viewer" src="" type="application/pdf"></iframe>
     </div>
   </div>
 
   <script>
-    // ✅ Simulasi data SOP langsung di dalam file
+    // ✅ Data SOP (judul, path audio, path PDF)
     const data = [
       {
-        title: "SOP ABCCE",
-        audio: "audio/ABCCE.mp3",
-        pdf: "pdf/ABCCE.pdf"
+        title: "SOP Onboarding",
+        audio: "audio/onboarding.mp3",
+        pdf: "pdf/onboarding.pdf"
       },
       {
         title: "SOP Rekrutmen",
         audio: "audio/rekrutmen.mp3",
         pdf: "pdf/rekrutmen.pdf"
+      },
+      {
+        title: "SOP ABCCE",
+        audio: "audio/abcce.mp3",
+        pdf: "pdf/abcce.pdf"
       }
     ];
 
-    const listDiv = document.getElementById('list');
-    const searchInput = document.getElementById('search');
-    const audioPlayer = document.getElementById('audio-player');
-    const pdfViewer = document.getElementById('pdf-viewer');
-    const sopTitle = document.getElementById('sop-title');
-
     // ✅ Ganti ini dengan username GitHub kamu
-    const cdnBase = 'https://cdn.jsdelivr.net/gh/ginting719/Audio/';
+    const cdnBase = "https://cdn.jsdelivr.net/gh/ginting719/audio/";
+
+    const listDiv = document.getElementById("list");
+    const searchInput = document.getElementById("search");
+    const audioPlayer = document.getElementById("audio-player");
+    const pdfViewer = document.getElementById("pdf-viewer");
+    const sopTitle = document.getElementById("sop-title");
 
     function renderList(items) {
-      listDiv.innerHTML = '';
+      listDiv.innerHTML = "";
       items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'item';
+        const div = document.createElement("div");
+        div.className = "item";
         div.textContent = item.title;
         div.onclick = () => {
           sopTitle.textContent = item.title;
           audioPlayer.src = `${cdnBase}${item.audio}`;
-          pdfViewer.src = `https://cdn.jsdelivr.net/npm/pdfjs-dist/web/viewer.html?file=${cdnBase}${item.pdf}`;
+          pdfViewer.src = `${cdnBase}${item.pdf}`;
         };
         listDiv.appendChild(div);
       });
     }
 
-    searchInput.addEventListener('input', (e) => {
+    searchInput.addEventListener("input", (e) => {
       const keyword = e.target.value.toLowerCase();
-      const filtered = data.filter(item => item.title.toLowerCase().includes(keyword));
+      const filtered = data.filter(item =>
+        item.title.toLowerCase().includes(keyword)
+      );
       renderList(filtered);
     });
 
-    // Load initial list
+    // Tampilkan daftar awal
     renderList(data);
   </script>
 </body>
