@@ -2,20 +2,17 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ALPRO PODCAST</title>
+  <link rel="icon" type="image/png" href="LOGO-01.png" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #f8f9fc;
       color: #333;
     }
-
     header {
       display: flex;
       align-items: center;
@@ -23,32 +20,24 @@
       padding: 1rem 2rem;
       background: #003366;
       color: white;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
     header img {
       height: 40px;
     }
-
     header h1 {
       margin: 0;
       font-size: 1.5rem;
     }
-
     .container {
       display: flex;
       padding: 1rem 2rem;
       gap: 1.5rem;
     }
-
     .left, .right {
       flex: 1;
     }
-
-    .left {
-      max-width: 400px;
-    }
-
+    .left { max-width: 400px; }
     .right iframe {
       width: 100%;
       height: 600px;
@@ -56,24 +45,20 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     .sop-title {
       font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
-
     .audio-player {
       width: 100%;
       margin-bottom: 1rem;
     }
-
     .downloads {
       display: none;
       gap: 10px;
       margin-bottom: 1rem;
     }
-
     .downloads button {
       padding: 0.5rem 1rem;
       background: #007bff;
@@ -82,31 +67,25 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     .downloads button:hover {
       background: #0056b3;
     }
-
     .search-sort {
       display: flex;
       gap: 1rem;
       margin-bottom: 1rem;
     }
-
     .search-sort input {
       flex: 1;
       padding: 0.5rem;
     }
-
     .search-sort select {
       padding: 0.5rem;
     }
-
     .playlist {
       list-style: none;
       padding: 0;
     }
-
     .playlist li {
       padding: 0.6rem;
       background: white;
@@ -117,11 +96,9 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .playlist li:hover {
       background: #f1f1f1;
     }
-
     .new-release {
       background: #e0f0ff;
       padding: 0.8rem;
@@ -129,21 +106,17 @@
       margin-bottom: 1rem;
       border-radius: 6px;
     }
-
     .new-release h3 {
       margin: 0 0 0.5rem 0;
     }
-
     .new-release-item {
       margin-bottom: 0.3rem;
       cursor: pointer;
       color: #003366;
     }
-
     .new-release-item:hover {
       text-decoration: underline;
     }
-
     .badge-new {
       background: red;
       color: white;
@@ -152,47 +125,57 @@
       border-radius: 12px;
       margin-left: 8px;
     }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .left { max-width: 100%; }
+      .right iframe { height: 400px; }
+      .downloads { flex-direction: column; }
+      .downloads button { width: 100%; margin-bottom: 5px; }
+    }
+    @media (max-width: 480px) {
+      .right iframe { height: 320px; }
+      header { flex-direction: column; align-items: flex-start; }
+      header img { height: 32px; }
+      header h1 { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="LOGO-01.png" alt="Logo Alpro" />
+    <img src="LOGO-01.png" alt="Logo ALPRO PODCAST" />
     <h1>ALPRO PODCAST</h1>
   </header>
-
   <div class="container">
     <div class="left">
-      <div class="sop-title" id="sopTitle">Pilih SOP</div>
-      <audio id="audioPlayer" class="audio-player" controls></audio>
-
-      <div class="downloads" id="downloadGroup">
-        <button id="downloadPDF">Download PDF</button>
+      <div class="sop-title" id="sop-title">Pilih SOP</div>
+      <audio class="audio-player" id="audio" controls></audio>
+      <div class="downloads" id="downloads">
         <button id="downloadAudio">Download Audio</button>
+        <button id="downloadPDF">Download PDF</button>
       </div>
-
-      <div class="new-release">
-        <h3>🔔 Baru Dirilis</h3>
-        <div id="newReleaseList"></div>
-      </div>
-
       <div class="search-sort">
-        <input type="text" id="searchInput" placeholder="Cari SOP..." />
-        <select id="sortSelect">
-          <option value="desc">Terbaru</option>
-          <option value="asc">Terlama</option>
+        <input type="text" id="search" placeholder="Cari SOP..." />
+        <select id="sort">
+          <option value="newest">Terbaru</option>
+          <option value="oldest">Terlama</option>
         </select>
       </div>
-
+      <div class="new-release" id="new-release">
+        <h3>🎉 Baru Dirilis</h3>
+        <div id="recent-list"></div>
+      </div>
       <ul class="playlist" id="playlist"></ul>
     </div>
-
     <div class="right">
-      <iframe id="pdfViewer" allow="autoplay"></iframe>
+      <iframe id="pdf-viewer" src=""></iframe>
     </div>
   </div>
 
   <script>
-    const data = [
+    const playlistData = [
       {
         title: "SOP ABCCE - 07/05/2025",
         audio: "https://cdn.jsdelivr.net/gh/ginting719/Audio/audio/ABCCE.mp3",
@@ -216,94 +199,85 @@
         audio: "https://cdn.jsdelivr.net/gh/ginting719/Audio/audio/PODCAST-09052025-MEMO-INTERNAL-PENGECEKAN-DO-DAN-FISIK-BARANG-DI-TOKO.mp3",
         driveId: "1SUSXft9NOFWAKa5InhK13hAoCahh6IlW",
         releaseDate: "2025-05-09"
-      },
+      }
     ];
 
-    const sopTitle = document.getElementById("sopTitle");
-    const audioPlayer = document.getElementById("audioPlayer");
-    const pdfViewer = document.getElementById("pdfViewer");
-    const downloadPDF = document.getElementById("downloadPDF");
-    const downloadAudio = document.getElementById("downloadAudio");
-    const downloadGroup = document.getElementById("downloadGroup");
+    const audio = document.getElementById('audio');
+    const title = document.getElementById('sop-title');
+    const viewer = document.getElementById('pdf-viewer');
+    const playlist = document.getElementById('playlist');
+    const search = document.getElementById('search');
+    const sort = document.getElementById('sort');
+    const recentList = document.getElementById('recent-list');
+    const downloads = document.getElementById('downloads');
+    const downloadAudio = document.getElementById('downloadAudio');
+    const downloadPDF = document.getElementById('downloadPDF');
 
-    const playlistEl = document.getElementById("playlist");
-    const searchInput = document.getElementById("searchInput");
-    const sortSelect = document.getElementById("sortSelect");
-
-    function isNew(releaseDate) {
+    function isNew(dateStr) {
       const today = new Date();
-      const date = new Date(releaseDate);
+      const date = new Date(dateStr);
       const diff = (today - date) / (1000 * 60 * 60 * 24);
       return diff <= 7;
     }
 
-    function renderList(list) {
-      playlistEl.innerHTML = "";
-      list.forEach((item) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <span>${item.title}${isNew(item.releaseDate) ? ' <span class="badge-new">New</span>' : ''}</span>
-        `;
+    function renderPlaylist(data) {
+      playlist.innerHTML = '';
+      data.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${item.title}${isNew(item.releaseDate) ? '<span class="badge-new">🆕 New</span>' : ''}</span>`;
         li.onclick = () => {
-          sopTitle.textContent = item.title;
-          audioPlayer.src = item.audio;
-          pdfViewer.src = `https://drive.google.com/file/d/${item.driveId}/preview`;
-          downloadGroup.style.display = "flex";
-          downloadPDF.onclick = () => {
-            window.open(`https://drive.google.com/uc?id=${item.driveId}&export=download`, "_blank");
-          };
-          downloadAudio.onclick = () => {
-            window.open(item.audio, "_blank");
-          };
+          title.textContent = item.title;
+          audio.src = item.audio;
+          viewer.src = item.pdf;
+          downloads.style.display = 'flex';
+          downloadAudio.onclick = () => window.open(item.audio, '_blank');
+          downloadPDF.onclick = () => window.open(item.pdf, '_blank');
         };
-        playlistEl.appendChild(li);
+        playlist.appendChild(li);
       });
     }
 
-    function renderNewReleases() {
-      const container = document.getElementById("newReleaseList");
-      const latest = data
-        .filter(d => isNew(d.releaseDate))
-        .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-      container.innerHTML = "";
-      latest.forEach(item => {
-        const el = document.createElement("div");
-        el.className = "new-release-item";
-        el.textContent = `📌 ${item.title} (${item.releaseDate})`;
-        el.onclick = () => {
-          sopTitle.textContent = item.title;
-          audioPlayer.src = item.audio;
-          pdfViewer.src = `https://drive.google.com/file/d/${item.driveId}/preview`;
-          downloadGroup.style.display = "flex";
-          downloadPDF.onclick = () => {
-            window.open(`https://drive.google.com/uc?id=${item.driveId}&export=download`, "_blank");
-          };
-          downloadAudio.onclick = () => {
-            window.open(item.audio, "_blank");
-          };
+    function updateRecent(data) {
+      recentList.innerHTML = '';
+      const recent = data.filter(d => isNew(d.releaseDate));
+      if (recent.length === 0) {
+        document.getElementById('new-release').style.display = 'none';
+        return;
+      }
+      document.getElementById('new-release').style.display = 'block';
+      recent.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'new-release-item';
+        div.textContent = item.title;
+        div.onclick = () => {
+          title.textContent = item.title;
+          audio.src = item.audio;
+          viewer.src = item.pdf;
+          downloads.style.display = 'flex';
+          downloadAudio.onclick = () => window.open(item.audio, '_blank');
+          downloadPDF.onclick = () => window.open(item.pdf, '_blank');
         };
-        container.appendChild(el);
+        recentList.appendChild(div);
       });
     }
 
-    searchInput.addEventListener("input", () => {
-      const keyword = searchInput.value.toLowerCase();
-      const filtered = data.filter(d => d.title.toLowerCase().includes(keyword));
-      renderList(filtered);
-    });
+    function applyFilter() {
+      const query = search.value.toLowerCase();
+      let filtered = playlistData.filter(d => d.title.toLowerCase().includes(query));
+      if (sort.value === 'newest') {
+        filtered.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+      } else {
+        filtered.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
+      }
+      renderPlaylist(filtered);
+    }
 
-    sortSelect.addEventListener("change", () => {
-      const sorted = [...data].sort((a, b) => {
-        return sortSelect.value === "asc"
-          ? new Date(a.releaseDate) - new Date(b.releaseDate)
-          : new Date(b.releaseDate) - new Date(a.releaseDate);
-      });
-      renderList(sorted);
-    });
+    search.oninput = applyFilter;
+    sort.onchange = applyFilter;
 
-    // Init
-    renderList([...data].sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate)));
-    renderNewReleases();
+    // Initial load
+    renderPlaylist(playlistData);
+    updateRecent(playlistData);
   </script>
 </body>
 </html>
