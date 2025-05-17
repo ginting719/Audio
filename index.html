@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ALPRO PODCAST</title>
+  <title>Podcast SOP Perusahaan</title>
   <style>
     body {
       font-family: sans-serif;
@@ -72,27 +72,29 @@
     <div class="content">
       <h2 id="sop-title">Pilih SOP</h2>
       <audio id="audio-player" controls style="width: 100%; margin-bottom: 1rem;"></audio>
-      <iframe id="pdf-viewer" src="" type="application/pdf"></iframe>
+      <iframe id="pdf-viewer" src=""></iframe>
     </div>
   </div>
 
   <script>
-    // ✅ Data SOP (judul, path audio, path PDF)
+    // ✅ Ganti link audio dengan GitHub/jsDelivr, dan pdf dengan ID Google Drive
     const data = [
       {
         title: "SOP Onboarding",
-        audio: "audio/onboarding.mp3",
-        pdf: "pdf/onboarding.pdf"
+        audio: "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sop-podcast/audio/onboarding.mp3",
+        driveId: "1A2B3C4D5E6F7G8H9" // Ganti ini!
+      },
+      {
+        title: "SOP Rekrutmen",
+        audio: "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sop-podcast/audio/rekrutmen.mp3",
+        driveId: "2B3C4D5E6F7G8H9I0" // Ganti ini!
       },
       {
         title: "SOP ABCCE",
-        audio: "audio/ABCCE.mp3",
-        pdf: "pdf/ABCCE.pdf"
+        audio: "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sop-podcast/audio/abcce.mp3",
+        driveId: "1WHcG5-UI0Bn17SfFb4egkfU-fCoQuEq2" // Ganti ini!
       }
     ];
-
-    // ✅ Ganti ini dengan username GitHub kamu
-    const cdnBase = "https://cdn.jsdelivr.net/gh/ginting719/audio/";
 
     const listDiv = document.getElementById("list");
     const searchInput = document.getElementById("search");
@@ -108,8 +110,8 @@
         div.textContent = item.title;
         div.onclick = () => {
           sopTitle.textContent = item.title;
-          audioPlayer.src = `${cdnBase}${item.audio}`;
-          pdfViewer.src = `${cdnBase}${item.pdf}`;
+          audioPlayer.src = item.audio;
+          pdfViewer.src = `https://drive.google.com/file/d/${item.driveId}/preview`;
         };
         listDiv.appendChild(div);
       });
@@ -123,7 +125,6 @@
       renderList(filtered);
     });
 
-    // Tampilkan daftar awal
     renderList(data);
   </script>
 </body>
