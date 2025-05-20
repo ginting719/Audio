@@ -2,210 +2,299 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALPRO PODCAST</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ALPRO PODCAST - Elegant</title>
   <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f8f9fc;
-    color: #333;
-  }
-
-  header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    background: #003366;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  header img {
-    height: 40px;
-  }
-
-  header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-
-  .container {
-    display: flex;
-    padding: 1rem 2rem;
-    gap: 1.5rem;
-  }
-
-  .left, .right {
-    flex: 1;
-  }
-
-  .left {
-    max-width: 400px;
-  }
-
-  .right iframe {
-    width: 100%;
-    height: 600px;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-
-  .sop-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-
-  .audio-player {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .downloads {
-    display: none;
-    gap: 10px;
-    margin-bottom: 1rem;
-  }
-
-  .downloads button {
-    padding: 0.5rem 1rem;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .downloads button:hover {
-    background: #0056b3;
-  }
-
-  .search-sort {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .search-sort input {
-    flex: 1;
-    padding: 0.5rem;
-  }
-
-  .search-sort select {
-    padding: 0.5rem;
-  }
-
-  .playlist {
-    list-style: none;
-    padding: 0;
-    max-height: 300px; /* Set a fixed height for scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
-  }
-
-  .playlist li {
-    padding: 0.6rem;
-    background: white;
-    margin-bottom: 0.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .playlist li:hover {
-    background: #f1f1f1;
-  }
-
-  .new-release {
-    background: #e0f0ff;
-    padding: 0.8rem;
-    border-left: 4px solid #007bff;
-    margin-bottom: 1rem;
-    border-radius: 6px;
-  }
-
-  .new-release h3 {
-    margin: 0 0 0.5rem 0;
-  }
-
-  .new-release-item {
-    margin-bottom: 0.3rem;
-    cursor: pointer;
-    color: #003366;
-  }
-
-  .new-release-item:hover {
-    text-decoration: underline;
-  }
-
-  .badge-new {
-    background: red;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 12px;
-    margin-left: 8px;
-  }
-
-  /* Responsive styling */
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      padding: 1rem;
+    * {
+      box-sizing: border-box;
     }
 
-    .left {
-      max-width: 100%;
+    body {
+      margin: 0;
+      font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fefefe;
+      color: #222;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .right iframe {
-      height: 400px;
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 3rem;
+      background: linear-gradient(135deg, #0a2647 0%, #144272 100%);
+      color: #eaeaea;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    header img {
+      height: 48px;
+      filter: drop-shadow(0 0 3px rgba(255,255,255,0.2));
     }
 
     header h1 {
-      font-size: 1.2rem;
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 2rem;
+      gap: 2.5rem;
+    }
+
+    .left, .right {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(20,40,80,0.1);
+      padding: 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left {
+      flex: 0 0 400px;
+      max-height: 820px;
+    }
+
+    .right {
+      flex: 1 1 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 36px rgba(20,40,80,0.15);
+    }
+
+    .right iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .sop-title {
+      font-size: 1.55rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      color: #0a2647;
+      user-select: none;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(160,180,230,0.3);
     }
 
     .audio-player {
       width: 100%;
+      margin-bottom: 1.8rem;
+      outline-offset: 4px;
+      outline-color: #144272;
+      outline-style: solid;
+      outline-width: 2px;
+      border-radius: 12px;
+      box-shadow: 0 5px 12px rgba(20,40,80,0.1);
+      background: #f9fafc;
     }
 
     .downloads {
-      flex-direction: column;
+      display: none;
+      gap: 12px;
+      margin-bottom: 1.6rem;
+      justify-content: center;
     }
 
     .downloads button {
-      width: 100%;
-      margin-bottom: 5px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .right iframe {
-      height: 320px;
-    }
-
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    header img {
-      height: 32px;
-    }
-
-    header h1 {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: #144272;
+      color: #eaeaea;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
       font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(20, 40, 80, 0.25);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
     }
-  }
+
+    .downloads button:hover,
+    .downloads button:focus {
+      background: #0a2647;
+      box-shadow: 0 6px 20px rgba(10, 38, 71, 0.7);
+      outline: none;
+    }
+
+    .new-release {
+      background: #e8f2ff;
+      padding: 1rem 1.25rem;
+      border-left: 6px solid #0a2647;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+    }
+
+    .new-release h3 {
+      margin: 0 0 0.6rem 0;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #064273;
+      user-select: none;
+    }
+
+    .new-release-item {
+      margin-bottom: 0.35rem;
+      cursor: pointer;
+      color: #0a2647;
+      font-weight: 600;
+      user-select: none;
+      transition: color 0.25s ease;
+    }
+
+    .new-release-item:hover,
+    .new-release-item:focus {
+      color: #062b4f;
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .badge-new {
+      background: #d32f2f;
+      color: white;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 12px;
+      margin-left: 8px;
+      font-weight: 700;
+      vertical-align: middle;
+      user-select: none;
+    }
+
+    .search-sort {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .search-sort input,
+    .search-sort select {
+      flex: 1;
+      padding: 0.78rem 1.1rem;
+      border-radius: 10px;
+      border: 2px solid #8ba6c1;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #264169;
+      background: #eaf1fc;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: text;
+    }
+
+    .search-sort input::placeholder {
+      color: #607799;
+      font-style: italic;
+    }
+
+    .search-sort input:focus,
+    .search-sort select:focus {
+      border-color: #0a2647;
+      box-shadow: 0 0 8px 2px rgba(10,38,71,0.4);
+      outline: none;
+      background: #fff;
+      color: #0a2647;
+    }
+
+    .playlist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 350px;
+      overflow-y: auto;
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px rgba(10,38,71,0.1);
+      background: #f9fafc;
+      user-select: none;
+    }
+
+    .playlist li {
+      padding: 0.8rem 1.25rem;
+      border-bottom: 1px solid #cbd2e1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      color: #0a2647;
+      transition: background-color 0.22s ease;
+    }
+
+    .playlist li:last-child {
+      border-bottom: none;
+    }
+
+    .playlist li:hover,
+    .playlist li:focus {
+      background-color: #dbe7ff;
+      outline: none;
+      color: #062b4f;
+    }
+
+    /* Scrollbar Styling */
+    .playlist::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .playlist::-webkit-scrollbar-track {
+      background: #f0f4ff;
+      border-radius: 12px;
+    }
+
+    .playlist::-webkit-scrollbar-thumb {
+      background-color: #0a2647;
+      border-radius: 12px;
+      border: 2px solid #f0f4ff;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        padding: 1rem 1rem 2rem;
+      }
+
+      .left {
+        max-width: 100%;
+        max-height: none;
+      }
+
+      .right {
+        margin-top: 2rem;
+        height: 450px;
+      }
+
+      .right iframe {
+        height: 100% !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 1rem;
+      }
+      header img {
+        height: 36px;
+      }
+      header h1 {
+        font-size: 1.25rem;
+        letter-spacing: 0.1em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -231,13 +320,13 @@
 
       <div class="search-sort">
         <input type="text" id="searchInput" placeholder="Cari SOP..." />
-        <select id="sortSelect">
+        <select id="sortSelect" title="Sortir berdasarkan tanggal">
           <option value="desc">Terbaru</option>
           <option value="asc">Terlama</option>
         </select>
       </div>
 
-      <ul class="playlist" id="playlist"></ul>
+      <ul class="playlist" id="playlist" role="listbox" aria-label="Daftar Podcast"></ul>
     </div>
 
     <div class="right">
@@ -319,14 +408,17 @@
         li.onclick = () => {
           sopTitle.textContent = item.title;
           audioPlayer.src = item.audio;
-          pdfViewer.src = `https://drive.google.com/file/d/${item.driveId}/preview`;
+          pdfViewer.src = \`https://drive.google.com/file/d/\${item.driveId}/preview\`;
           downloadGroup.style.display = "flex";
           downloadPDF.onclick = () => {
-            window.open(`https://drive.google.com/uc?id=${item.driveId}&export=download`, "_blank");
+            window.open(\`https://drive.google.com/uc?id=\${item.driveId}&export=download\`, "_blank");
           };
           downloadAudio.onclick = () => {
             window.open(item.audio, "_blank");
           };
+          // Scroll playlist to highlight selected item
+          [...playlistEl.children].forEach(child => child.classList.remove('selected'));
+          li.classList.add('selected');
         };
         playlistEl.appendChild(li);
       });
@@ -353,29 +445,41 @@
           downloadAudio.onclick = () => {
             window.open(item.audio, "_blank");
           };
+          // Scroll playlist to highlight selected item
+          [...playlistEl.children].forEach(child => child.classList.remove('selected'));
+          const idx = data.findIndex(d => d.title === item.title);
+          if(idx >= 0 && playlistEl.children[idx]) playlistEl.children[idx].classList.add('selected');
+          playlistEl.children[idx]?.scrollIntoView({behavior: "smooth", block: "center"});
         };
         container.appendChild(el);
       });
     }
 
-    searchInput.addEventListener("input", () => {
+    function filterList() {
+      let filtered = data;
       const keyword = searchInput.value.toLowerCase();
-      const filtered = data.filter(d => d.title.toLowerCase().includes(keyword));
-      renderList(filtered);
-    });
+      if (keyword) {
+        filtered = filtered.filter(d => d.title.toLowerCase().includes(keyword));
+      }
 
-    sortSelect.addEventListener("change", () => {
-      const sorted = [...data].sort((a, b) => {
-        return sortSelect.value === "asc"
+      const sortOrder = sortSelect.value;
+      filtered = filtered.sort((a, b) => {
+        return sortOrder === "asc"
           ? new Date(a.releaseDate) - new Date(b.releaseDate)
           : new Date(b.releaseDate) - new Date(a.releaseDate);
       });
-      renderList(sorted);
-    });
 
-    // Init
-    renderList([...data].sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate)));
+      renderList(filtered);
+    }
+
+    searchInput.addEventListener("input", filterList);
+    sortSelect.addEventListener("change", filterList);
+
+    // Initialize displays
+    const sortedData = [...data].sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+    renderList(sortedData);
     renderNewReleases();
   </script>
 </body>
 </html>
+
